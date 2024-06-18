@@ -2,7 +2,11 @@
     <title>الة حاسبة</title>
 </svelte:head>
 
-<div class="bg-white rounded-3xl grid grid-cols-4 gap-1">
+<!-- padding -->
+<div class="bg-white rounded-3xl grid grid-cols-4 gap-1 p-6">
+    <div class="bg-blue-500 rounded-full col-span-4 h-16 flex items-center px-4 mb-4">
+        123456
+    </div>
     <button> % </button>
     <button> √ </button>
     <button> CE </button>
