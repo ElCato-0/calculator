@@ -9,9 +9,17 @@
         equation += value;
     }
 
-    // TODO: fix remove spaces
     function backspace() {
-        equation = equation.substring(0, equation.length - 1);
+        switch (equation.substring(equation.length - 3, equation.length)) {
+            case " + ":
+            case " * ":
+            case " - ":
+            case " / ":
+                equation = equation.substring(0, equation.length - 3);
+                break;
+            default:
+                equation = equation.substring(0, equation.length - 1);
+        }
     }
 
     function clear() {
@@ -30,21 +38,17 @@
 </svelte:head>
 
 <div
-    class="bg-white rounded-3xl grid grid-cols-4 gap-1 p-6 font-semibold text-xl shadow-xl"
+    class="bg-white rounded-3xl grid grid-cols-4 gap-1 p-6 font-semibold text-xl shadow-xl max-w-[16rem]"
 >
-    <!-- TODO: fix overflowing numbers -->
-
     <!-- Output -->
     <div
-        class="bg-blue-500 rounded-full col-span-4 h-12 flex items-center px-4 mb-2 text-white"
+        class="bg-blue-500 rounded-xl col-span-4 min-h-12 flex items-center px-4 mb-2 text-white break-all"
     >
         {equation}
     </div>
 
     <!-- Row #1 -->
-    <button on:click={() => clear()} class="bg-[#f3f6fc]">
-        AC
-    </button>
+    <button on:click={() => clear()} class="bg-[#f3f6fc]"> AC </button>
     <button on:click={() => backspace()} class="bg-[#f3f6fc]">
         <BackSpaceIcon />
     </button>
@@ -94,5 +98,7 @@
     <!-- Row #5 -->
     <button on:click={() => addToEquation(".")}> . </button>
     <button on:click={() => addToEquation("0")}> 0 </button>
-    <button on:click={() => solve()} class="col-span-2 bg-[#f3f6fc]"> = </button>
+    <button on:click={() => solve()} class="col-span-2 bg-[#f3f6fc]">
+        =
+    </button>
 </div>
