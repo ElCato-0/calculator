@@ -38,7 +38,7 @@
 </svelte:head>
 
 <div
-    class="bg-white rounded-3xl grid grid-cols-4 gap-1 p-6 font-semibold text-xl shadow-xl max-w-[16rem]"
+    class="bg-white rounded-3xl grid grid-cols-4 gap-1 p-6 font-semibold text-xl shadow-xl w-[16rem]"
 >
     <!-- Output -->
     <div
