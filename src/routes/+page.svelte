@@ -27,7 +27,17 @@
     }
 
     function solve() {
-        equation = eval(equation);
+        try {
+            let answer = eval(equation);
+            if (answer == undefined) throw SyntaxError;
+            equation = answer;
+        } catch (error) {
+            let output = document.getElementById('output');
+            output?.classList.add('bg-red-500');
+            setTimeout(() => {
+                output?.classList.remove('bg-red-500');
+            }, 500);
+        }
     }
 
     let equation: string = "";
@@ -42,7 +52,8 @@
 >
     <!-- Output -->
     <div
-        class="bg-blue-500 rounded-xl col-span-4 min-h-12 flex items-center px-4 mb-2 text-white break-all"
+        id="output"
+        class="bg-blue-500 rounded-xl col-span-4 min-h-12 flex items-center px-4 mb-2 text-white break-all transition-all"
     >
         {equation}
     </div>
