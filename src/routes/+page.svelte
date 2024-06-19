@@ -32,20 +32,32 @@
             if (answer == undefined) throw SyntaxError;
             equation = answer;
         } catch (error) {
-            let output = document.getElementById('output');
-            output?.classList.add('bg-red-500');
+            let output = document.getElementById("output");
+            output?.classList.add("bg-red-500");
             setTimeout(() => {
-                output?.classList.remove('bg-red-500');
+                output?.classList.remove("bg-red-500");
             }, 500);
         }
     }
 
     let equation: string = "";
+
+    function onKeyDown(e: KeyboardEvent) {
+        let button = document.getElementById(e.key);
+        button?.click();
+        button?.focus();
+        setTimeout(() => {
+            // @ts-ignore
+            document.activeElement?.blur();
+        }, 100);
+    }
 </script>
 
 <svelte:head>
     <title>الة حاسبة</title>
 </svelte:head>
+
+<svelte:window on:keydown|preventDefault={onKeyDown} />
 
 <div
     class="bg-white rounded-3xl grid grid-cols-4 gap-1 p-6 font-semibold text-xl shadow-xl w-[16rem]"
@@ -59,14 +71,21 @@
     </div>
 
     <!-- Row #1 -->
-    <button on:click={() => clear()} class="bg-[#f3f6fc]"> AC </button>
-    <button on:click={() => backspace()} class="bg-[#f3f6fc]">
+    <button id="Delete" on:click={() => clear()} class="bg-[#f3f6fc]">
+        AC
+    </button>
+    <button id="Backspace" on:click={() => backspace()} class="bg-[#f3f6fc]">
         <BackSpaceIcon />
     </button>
-    <button on:click={() => addToEquation(" / 100")} class="bg-[#f3f6fc]">
+    <button
+        id="%"
+        on:click={() => addToEquation(" / 100")}
+        class="bg-[#f3f6fc]"
+    >
         %
     </button>
     <button
+        id="+"
         on:click={() => addToEquation(" + ")}
         class="bg-[#63dc74] text-white"
     >
@@ -74,10 +93,11 @@
     </button>
 
     <!-- Row #2 -->
-    <button on:click={() => addToEquation("7")}> 7 </button>
-    <button on:click={() => addToEquation("8")}> 8 </button>
-    <button on:click={() => addToEquation("9")}> 9 </button>
+    <button id="7" on:click={() => addToEquation("7")}> 7 </button>
+    <button id="8" on:click={() => addToEquation("8")}> 8 </button>
+    <button id="9" on:click={() => addToEquation("9")}> 9 </button>
     <button
+        id="-"
         on:click={() => addToEquation(" - ")}
         class="bg-[#fd3f59] text-white"
     >
@@ -85,10 +105,11 @@
     </button>
 
     <!-- Row #3 -->
-    <button on:click={() => addToEquation("4")}> 4 </button>
-    <button on:click={() => addToEquation("5")}> 5 </button>
-    <button on:click={() => addToEquation("6")}> 6 </button>
+    <button id="4" on:click={() => addToEquation("4")}> 4 </button>
+    <button id="5" on:click={() => addToEquation("5")}> 5 </button>
+    <button id="6" on:click={() => addToEquation("6")}> 6 </button>
     <button
+        id="/"
         on:click={() => addToEquation(" / ")}
         class="bg-[#2285fd] text-white"
     >
@@ -96,10 +117,11 @@
     </button>
 
     <!-- Row #4 -->
-    <button on:click={() => addToEquation("1")}> 1 </button>
-    <button on:click={() => addToEquation("2")}> 2 </button>
-    <button on:click={() => addToEquation("3")}> 3 </button>
+    <button id="1" on:click={() => addToEquation("1")}> 1 </button>
+    <button id="2" on:click={() => addToEquation("2")}> 2 </button>
+    <button id="3" on:click={() => addToEquation("3")}> 3 </button>
     <button
+        id="*"
         on:click={() => addToEquation(" * ")}
         class="bg-[#f9c80e] text-white"
     >
@@ -107,9 +129,9 @@
     </button>
 
     <!-- Row #5 -->
-    <button on:click={() => addToEquation(".")}> . </button>
-    <button on:click={() => addToEquation("0")}> 0 </button>
-    <button on:click={() => solve()} class="col-span-2 bg-[#f3f6fc]">
+    <button id="." on:click={() => addToEquation(".")}> . </button>
+    <button id="0" on:click={() => addToEquation("0")}> 0 </button>
+    <button id="=" on:click={() => solve()} class="col-span-2 bg-[#f3f6fc]">
         =
     </button>
 </div>
