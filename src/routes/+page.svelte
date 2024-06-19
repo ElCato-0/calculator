@@ -4,6 +4,7 @@
     import MultiplyIcon from "$lib/icons/Multiply.svelte";
     import PlusIcon from "$lib/icons/Plus.svelte";
     import BackSpaceIcon from "$lib/icons/Backspace.svelte";
+    import { onMount } from "svelte";
 
     function addToEquation(value: string) {
         equation += value;
@@ -51,6 +52,15 @@
             document.activeElement?.blur();
         }, 100);
     }
+
+    onMount(() => {
+        let allButtons = document.getElementsByTagName('button');
+        for (let i = 0; i < allButtons.length; i++) {
+            allButtons[i].addEventListener('click', () => {
+                new Audio('/click.wav').play();
+            });
+        }
+    });
 </script>
 
 <svelte:head>
